@@ -23,6 +23,7 @@ public class DepartmentController {
         return departmentService.getAllDepartments();
     }
 
+    /*
     @DeleteMapping("/{id}")
     public ResponseEntity<?> removeDepartment(@PathVariable Long id) {
         try {
@@ -35,6 +36,12 @@ public class DepartmentController {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(Map.of("error", ex.getMessage()));
         }
+    }
+    */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removeDepartment(@PathVariable Long id) {
+        departmentService.deleteDepartment(id);
+        return ResponseEntity.noContent().build(); // 204 on success
     }
 
     @GetMapping("/{id}")

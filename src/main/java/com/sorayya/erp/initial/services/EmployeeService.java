@@ -33,7 +33,7 @@ public class EmployeeService {
     }
 
     @Transactional
-    public Employee saveEmployee(Employee employee) throws ResourceNotFoundException {
+    public Employee saveEmployee(Employee employee){
         // 1. Resolve department from DB
         if (employee.getDepartment() != null && employee.getDepartment().getDepartmentId() != null) {
             Long deptId = employee.getDepartment().getDepartmentId();
@@ -52,7 +52,7 @@ public class EmployeeService {
     }
 
     @Transactional
-    public Employee updateEmployee(Long id, Employee data) throws ResourceNotFoundException {
+    public Employee updateEmployee(Long id, Employee data) {
         Employee existing = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id " + id));
 
