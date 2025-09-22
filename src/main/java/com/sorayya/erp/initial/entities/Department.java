@@ -21,8 +21,8 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long departmentId;
+    @Column(name = "departmentName", nullable = false, unique = true)
     private String departmentName;
-
     @OneToMany(mappedBy = "department")
     private List<Employee> employee;
 

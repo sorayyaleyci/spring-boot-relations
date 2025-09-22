@@ -6,10 +6,13 @@ import com.sorayya.erp.initial.entities.Employee;
 import com.sorayya.erp.initial.entities.EmployeeDetail;
 import com.sorayya.erp.initial.repositiories.DepartmentRepository;
 import com.sorayya.erp.initial.repositiories.EmployeeRepository;
+import jakarta.persistence.Tuple;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmployeeService {
@@ -83,4 +86,31 @@ public class EmployeeService {
 
         return employeeRepository.save(existing);
     }
+
+    public Map<String, Long> getEmployeeCountByCity() {
+        List<Object[]> results = employeeRepository.countEmployeesByCity();
+
+        Map<String, Long> cityCounts = new HashMap<>();
+        for (Object[] row : results) {
+            String city = (String) row[0];
+            Long count = (Long) row[1];
+            cityCounts.put(city, count);
+        }
+
+        return cityCounts;
+    }
+
+    public Map<String, Long> getEmployeeCountByDepartment() {
+        List<Tuple> results = employeeRepository.countEmployeesByDepartment();
+
+        Map<String, Long> departmentCounts = new HashMap<>();
+        for (Tuple tuple : results) {
+            String deptName = tuple.get("departmentName", String.class);
+            Long count = tuple.get("count", Long.class);
+            departmentCounts.put(deptName, count);
+        }
+
+        return departmentCounts;
+    }
+
 }
