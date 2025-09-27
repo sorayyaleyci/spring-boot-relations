@@ -33,8 +33,6 @@ public class DepartmentService {
     public void deleteDepartment(Long id) {
         Department dept = departmentRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found"));
-        if(!dept.getEmployee().isEmpty())
-            throw new IllegalStateException("The department has employees");
         departmentRepository.delete(dept);
     }
 

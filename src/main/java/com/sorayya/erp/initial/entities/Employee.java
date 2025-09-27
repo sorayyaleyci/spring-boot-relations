@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.Cascade;
 
 @Entity(name = "employee")
 @Table(name = "Employee_TBL")
@@ -29,8 +28,8 @@ public class Employee {
     @JoinColumn(name = "detail_id")
     private EmployeeDetail employeeDetail;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "department_id")
+    @ManyToOne
+    @JoinColumn(name = "department_id",nullable = false)
     private Department department;
 
 }

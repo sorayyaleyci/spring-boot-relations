@@ -1,5 +1,6 @@
 package com.sorayya.erp.initial.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +24,6 @@ public class Department {
     private Long departmentId;
     @Column(name = "departmentName", nullable = false, unique = true)
     private String departmentName;
-    @OneToMany(mappedBy = "department")
-    private List<Employee> employee;
+
 
 }
